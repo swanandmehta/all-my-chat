@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { OktaAuthGuard, OktaCallbackComponent } from '@okta/okta-angular';
 import { LandingHomeComponent } from './component/landing-home/landing-home.component';
 
 const routes: Routes = [
@@ -14,14 +15,20 @@ const routes: Routes = [
     component: LandingHomeComponent
   },
   {
+    path: "landing/callback",
+    pathMatch: "full",
+    component: OktaCallbackComponent
+  },
+  {
     path: "dashboard",
     pathMatch: "full",
+    canActivate: [OktaAuthGuard],
     loadChildren: () => import('../dashboard/dashboard.module').then(m => m.DashboardModule)
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {enableTracing: true})],
   exports: [RouterModule]
 })
 export class LandingRoutingModule { }

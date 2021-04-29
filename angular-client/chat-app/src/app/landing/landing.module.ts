@@ -5,11 +5,13 @@ import { LandingRoutingModule } from './landing-routing.module';
 import { LandingHomeComponent } from './component/landing-home/landing-home.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { SharedModule } from '../shared/shared.module';
+import { RootComponent } from './component/root/root.component';
 
 
 @NgModule({
   declarations: [
-    LandingHomeComponent
+    LandingHomeComponent,
+    RootComponent
   ],
   imports: [
     BrowserModule,
@@ -17,6 +19,6 @@ import { SharedModule } from '../shared/shared.module';
     LandingRoutingModule,
     SharedModule
   ],
-  bootstrap: [LandingHomeComponent]
+  bootstrap: [RootComponent]
 })
 export class LandingModule { }
