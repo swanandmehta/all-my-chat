@@ -1,1 +1,36 @@
-<p>dashboard-home works!</p>
+<div class="clr-row">
+    <div class="clr-col">&nbsp;</div>
+    <div class="clr-col-2 d-flex align-items-center justify-content-center">
+        <h6 class="m-0">Welcome user</h6>
+    </div>
+    <div class="clr-col-1">
+        <button class="btn btn-primary btn-block">Logout</button>
+    </div>
+</div>
+
+<div class="new-chat">
+    <button type="button" class="btn btn-primary">
+        New Chat
+    </button>
+</div>
+
+<clr-tabs clrLayout="vertical">
+    <clr-tab>
+        <button clrTabLink>Dashboard</button>
+        <clr-tab-content *clrIfActive>
+            Dashboard content
+        </clr-tab-content>
+    </clr-tab>
+    <clr-tab>
+        <button clrTabLink>Management</button>
+        <clr-tab-content *clrIfActive="true">
+            Management content
+        </clr-tab-content>
+    </clr-tab>
+    <clr-tab>
+        <button clrTabLink>Cloud</button>
+        <clr-tab-content *clrIfActive="true">
+            Cloud content
+        </clr-tab-content>
+    </clr-tab>
+</clr-tabs>

@@ -15,7 +15,7 @@ const routes: Routes = [
     component: LandingHomeComponent
   },
   {
-    path: "landing/callback",
+    path: "auth/callback",
     pathMatch: "full",
     component: OktaCallbackComponent
   },

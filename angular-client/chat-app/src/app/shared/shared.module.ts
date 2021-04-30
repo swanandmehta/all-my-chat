@@ -4,6 +4,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { ReactiveFormsModule } from '@angular/forms';
 import { OktaAuthModule, OKTA_CONFIG } from '@okta/okta-angular';
 import { environment } from 'src/environments/environment';
+import { ClarityModule } from '@clr/angular';
 
 
 
@@ -12,7 +13,8 @@ import { environment } from 'src/environments/environment';
   imports: [
     CommonModule,
     ToastrModule.forRoot(),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ClarityModule
   ],
   providers: [
     {
@@ -24,6 +26,6 @@ import { environment } from 'src/environments/environment';
       }
     }
   ],
-  exports: [ToastrModule, ReactiveFormsModule, OktaAuthModule]
+  exports: [ToastrModule, ReactiveFormsModule, OktaAuthModule, ClarityModule]
 })
 export class SharedModule { }
