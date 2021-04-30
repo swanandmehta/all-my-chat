@@ -9,22 +9,10 @@
 </div>
 
 <clr-tabs clrLayout="vertical">
-    <clr-tab>
-        <button clrTabLink>Dashboard</button>
+    <clr-tab *ngFor="let topic of topicList">
+        <button clrTabLink>{{topic.name}}</button>
         <clr-tab-content *clrIfActive>
-            Dashboard content
-        </clr-tab-content>
-    </clr-tab>
-    <clr-tab>
-        <button clrTabLink>Management</button>
-        <clr-tab-content *clrIfActive="true">
-            Management content
-        </clr-tab-content>
-    </clr-tab>
-    <clr-tab>
-        <button clrTabLink>Cloud</button>
-        <clr-tab-content *clrIfActive="true">
-            Cloud content
+            <app-chat-container [topic]="topic"></app-chat-container>
         </clr-tab-content>
     </clr-tab>
 </clr-tabs>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalConfig } from 'src/app/shared/config/modal-config';
 import { Topic } from 'src/app/shared/dto/topic';
+import { TopicService } from 'src/app/shared/service/topic.service';
 
 @Component({
   selector: 'app-dashboard-home',
@@ -10,9 +11,11 @@ import { Topic } from 'src/app/shared/dto/topic';
 export class DashboardHomeComponent implements OnInit {
 
   public modalConfig: ModalConfig;
+  public topicList: Topic[];
 
-  constructor() {
+  constructor(private topicService: TopicService) {
     this.modalConfig = new ModalConfig();
+    this.topicList = this.topicService.getTopicList();
   }
 
   ngOnInit(): void {
@@ -23,7 +26,7 @@ export class DashboardHomeComponent implements OnInit {
   }
 
   onTopicSelection(topic: Topic): void {
-    console.log(topic);
+    this.topicList.push(topic);
   }
 
 }

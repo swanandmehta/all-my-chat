@@ -33,16 +33,25 @@ export class TopicModalComponent implements OnInit {
   }
 
   onClose(): void {
+    this.reset();
     this.modalConfig.state = false;
   }
 
   onConfirm(): void {
     if(this.topicForm.valid) {
       this.onTopicSelection.emit(this.topicForm.value as Topic);
+      this.reset();
       this.modalConfig.state = false;
     } else {
       this.toaster.error("Please provide valid topic name.");
     }
+
+  }
+
+  private reset(): void {
+    this.topicForm.reset({
+      name:'',
+    }, {emitEvent: false});
 
   }
 
