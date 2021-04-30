@@ -1,0 +1,17 @@
+<div *ngIf="message.role === 'AGENT'">
+    <div class="alert alert-info" role="alert">
+        <div class="alert-text text-left">{{message.content}}</div>
+    </div>
+</div>
+
+<div *ngIf="message.role === 'ROBOT'">
+    <div class="alert alert-info alert-robot" role="alert">
+        <div class="alert-text text-left">{{message.content}}</div>
+    </div>
+</div>
+
+<div *ngIf="message.role === 'USER'">
+    <div class="alert alert-success" role="alert">
+        <div class="alert-text text-right">{{message.content}}</div>
+    </div>
+</div>

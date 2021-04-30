@@ -4,23 +4,24 @@
         <h6 class="m-0">Welcome user</h6>
     </div>
     <div class="clr-col-1">
+        <button type="button" class="btn btn-primary" (click)="openNewChat()">New Chat</button>
+    </div>
+    <div class="clr-col-1">
         <button class="btn btn-primary btn-block">Logout</button>
     </div>
 </div>
 
-<clr-tabs clrLayout="vertical">
-    <clr-tab *ngFor="let topic of topicList">
-        <button clrTabLink>{{topic.name}}</button>
-        <clr-tab-content *clrIfActive>
-            <app-chat-container [topic]="topic"></app-chat-container>
-        </clr-tab-content>
-    </clr-tab>
-</clr-tabs>
+<div class="clr-row">
+    <div class="clr-col">
+        <clr-tabs>
+            <clr-tab *ngFor="let topic of topicList">
+                <button clrTabLink>{{topic.name}}</button>
+                <clr-tab-content *clrIfActive>
+                    <app-chat-container [topic]="topic"></app-chat-container>
+                </clr-tab-content>
+            </clr-tab>
+        </clr-tabs>
+    </div>
+</div>
 
 <app-topic-modal [modalConfig]="modalConfig" (onTopicSelection)="onTopicSelection($event)"></app-topic-modal>
-
-<div class="new-chat">
-    <button type="button" class="btn btn-primary" (click)="openNewChat()">
-        New Chat
-    </button>
-</div>

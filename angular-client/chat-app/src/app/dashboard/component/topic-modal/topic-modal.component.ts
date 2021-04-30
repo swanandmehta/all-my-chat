@@ -20,6 +20,7 @@ export class TopicModalComponent implements OnInit {
   public topicForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private toaster: ToastrService) {
+
     this.topicForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(1)]]
     });
@@ -39,7 +40,8 @@ export class TopicModalComponent implements OnInit {
 
   onConfirm(): void {
     if(this.topicForm.valid) {
-      this.onTopicSelection.emit(this.topicForm.value as Topic);
+      const topic: Topic = {...new Topic(), ...this.topicForm.value};
+      this.onTopicSelection.emit(topic);
       this.reset();
       this.modalConfig.state = false;
     } else {

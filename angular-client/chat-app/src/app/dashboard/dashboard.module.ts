@@ -6,13 +6,15 @@ import { DashboardHomeComponent } from './component/dashboard-home/dashboard-hom
 import { SharedModule } from '../shared/shared.module';
 import { TopicModalComponent } from './component/topic-modal/topic-modal.component';
 import { ChatContainerComponent } from './component/chat-container/chat-container.component';
+import { MessageComponent } from './component/message/message.component';
 
 
 @NgModule({
   declarations: [
     DashboardHomeComponent,
     TopicModalComponent,
-    ChatContainerComponent
+    ChatContainerComponent,
+    MessageComponent
   ],
   imports: [
     CommonModule,

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Topic } from 'src/app/shared/dto/topic';
 
 @Component({
@@ -9,10 +10,14 @@ import { Topic } from 'src/app/shared/dto/topic';
 export class ChatContainerComponent implements OnInit {
 
   @Input("topic")
-  public topic: Topic | null;
+  public topic: Topic;
+  public chatForm: FormGroup;
 
-  constructor() {
-    this.topic = null;
+  constructor(private formBuilder: FormBuilder) {
+    this.topic = new Topic();
+    this.chatForm = this.formBuilder.group({
+      content: ['', [Validators.required, Validators.minLength(1)]]
+    });
   }
 
   ngOnInit(): void {

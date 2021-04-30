@@ -1,0 +1,4 @@
+.message-pane-height {
+    height: 75vh;
+    overflow-y: auto;
+}

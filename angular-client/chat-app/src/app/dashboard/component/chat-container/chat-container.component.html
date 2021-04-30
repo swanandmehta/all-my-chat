@@ -1,1 +1,19 @@
-<p>chat-container works!</p>
+<form [formGroup]="chatForm">
+
+    <div class="clr-row message-pane-height">
+        <app-message class="clr-col-12" [message]="message" *ngFor="let message of topic.messageList"></app-message>
+    </div>
+
+    <div class="clr-row">
+        <div class="clr-col-10 pt-2">
+            <div class="clr-control-container w-100">
+                <div class="clr-input-wrapper w-100">
+                    <input type="text" id="name" formControlName="content" placeholder="Type a message" class="clr-input w-100"/>
+                </div>
+            </div>
+        </div>
+        <div class="clr-col-2">
+            <button type="button" class="btn btn-primary btn-block">Send</button>
+        </div>
+    </div>
+</form>
