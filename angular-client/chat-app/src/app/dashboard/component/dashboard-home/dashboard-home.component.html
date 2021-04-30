@@ -8,12 +8,6 @@
     </div>
 </div>
 
-<div class="new-chat">
-    <button type="button" class="btn btn-primary">
-        New Chat
-    </button>
-</div>
-
 <clr-tabs clrLayout="vertical">
     <clr-tab>
         <button clrTabLink>Dashboard</button>
@@ -34,3 +28,11 @@
         </clr-tab-content>
     </clr-tab>
 </clr-tabs>
+
+<app-topic-modal [modalConfig]="modalConfig" (onTopicSelection)="onTopicSelection($event)"></app-topic-modal>
+
+<div class="new-chat">
+    <button type="button" class="btn btn-primary" (click)="openNewChat()">
+        New Chat
+    </button>
+</div>

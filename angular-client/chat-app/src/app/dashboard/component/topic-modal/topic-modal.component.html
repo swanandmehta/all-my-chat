@@ -1,0 +1,22 @@
+<clr-modal [clrModalOpen]="modalConfig.state" [clrModalClosable]="modalConfig.showCloseBtn" clrModalSkipAnimation="modalConfig.skipAnimation">
+    <h3 class="modal-title">New Chat</h3>
+    <div class="modal-body min-height-100">
+        <form [formGroup]="topicForm">
+            <div class="clr-form-control w-100">
+                <label for="example1" class="clr-control-label w-100">Topic Name</label>
+                <div class="clr-control-container w-100">
+                    <div class="clr-input-wrapper w-100">
+                        <input type="text" id="name" 
+                            formControlName="name" 
+                            placeholder="Please provide the name of the item would you like to discuss" 
+                            class="clr-input w-100" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer border-top-0">
+        <button type="button" class="btn btn-outline" (click)="onClose()">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="onConfirm()">Confirm</button>
+    </div>
+</clr-modal>

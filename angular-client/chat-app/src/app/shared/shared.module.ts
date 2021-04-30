@@ -12,7 +12,10 @@ import { ClarityModule } from '@clr/angular';
   declarations: [],
   imports: [
     CommonModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      'closeButton': false,
+      'tapToDismiss': true
+    }),
     ReactiveFormsModule,
     ClarityModule
   ],
