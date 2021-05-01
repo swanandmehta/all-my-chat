@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Client } from '@stomp/stompjs';
 import { Message } from 'src/app/shared/dto/message';
@@ -12,10 +12,14 @@ import { UserService } from 'src/app/shared/service/user.service';
 	templateUrl: './chat-container.component.html',
 	styleUrls: ['./chat-container.component.css']
 })
-export class ChatContainerComponent implements OnInit {
+export class ChatContainerComponent implements OnInit, AfterViewChecked {
 
 	@Input("topic")
 	public topic: Topic;
+	
+	@ViewChild('scrollableElement') 
+	private scrollableDiv: ElementRef | null = null;
+
 	public chatForm: FormGroup;
 	public client: Client;
 	public activeUser: User | null = null;
@@ -44,8 +48,19 @@ export class ChatContainerComponent implements OnInit {
 			this.messageService.getAllMessage(this.topic.uuid).then(
 				(messsageList: Message[]) => {
 					this.topic.messageList = messsageList;
+					this.scrollToBottom();					
 				}
 			)
+		}
+	}
+
+	ngAfterViewChecked() {        
+        this.scrollToBottom();        
+	}
+	
+	scrollToBottom(): void {
+		if(this.scrollableDiv !== null) {
+			this.scrollableDiv.nativeElement.scrollTop = this.scrollableDiv.nativeElement.scrollHeight;
 		}
 	}
 

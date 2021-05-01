@@ -1,6 +1,6 @@
 <form [formGroup]="chatForm" (submit)="onSendMessage()">
 
-    <div class="message-pane-height">
+    <div class="message-pane-height" #scrollableElement>
             <app-message class="clr-col-12 p-0" [message]="message" *ngFor="let message of topic.messageList"></app-message>
     </div>
 
