@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Client, IMessage } from '@stomp/stompjs';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 import { Topic } from 'src/app/shared/dto/topic';
 
@@ -13,7 +14,7 @@ export class ChatContainerComponent implements OnInit {
   @Input("topic")
   public topic: Topic;
   public chatForm: FormGroup;
-  private subject: WebSocketSubject<string> = webSocket("ws://localhost:8080/message");
+  public client: Client;
 
   constructor(private formBuilder: FormBuilder) {
     this.topic = new Topic();
@@ -21,6 +22,16 @@ export class ChatContainerComponent implements OnInit {
       content: ['', [Validators.required, Validators.minLength(1)]]
     });
 
+    this.client = new Client({
+      webSocketFactory: () => {
+        return new WebSocket("ws://localhost:8080/chat");
+      },
+      debug : (message: string) => {
+        console.log(message);
+      }
+    });
+
+    this.client.activate();
   }
 
   ngOnInit(): void {
@@ -28,8 +39,11 @@ export class ChatContainerComponent implements OnInit {
   }
 
   onSendMessage():  void {
-    this.subject.subscribe();
-    this.subject.next(this.chatForm.value.content);
+    this.client.publish({
+      destination: "/topic",
+      body: this.chatForm.value.content
+    });
+    //this.subject.next(this.chatForm.value.content);
   }
 
 }

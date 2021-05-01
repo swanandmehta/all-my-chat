@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Topic } from '../dto/topic';
-import * as SockJS from 'sockjs-client'
-import { Stomp, Client } from '@stomp/stompjs';
+import { Client, IMessage } from '@stomp/stompjs';
 import { HttpClient } from '@angular/common/http';
 
 
@@ -31,14 +30,17 @@ export class TopicService {
 
   private initConnection(topic: Topic): Client {
     const client: Client = new Client({
-      webSocketFactory: () => {
-        return new WebSocket("ws://localhost:8080/chat");
-      },
-      debug : (message: string) => {
+      brokerURL: "ws://localhost:8080/chat",
+      debug: (message: string) => {
         console.log(message);
       },
+      onConnect: () => {
+        client.subscribe("/topic/reply", (message: IMessage)=>{
+          console.log(message);
+        });
+      }
     });
-
+    
     client.activate();
     return client;
   }
