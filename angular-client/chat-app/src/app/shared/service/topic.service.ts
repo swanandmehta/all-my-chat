@@ -13,10 +13,8 @@ import { environment } from 'src/environments/environment';
 export class TopicService {
 
 	private topicList: Topic[];
-	private clientList: Client[];
 
 	constructor(private httpClient: HttpClient, private userService: UserService) {
-		this.clientList = [];
 		this.topicList = [];
 	}
 
@@ -39,12 +37,12 @@ export class TopicService {
 			}
 
 			this.httpClient.get<Topic[]>(environment.topic.rest.getAll, {params: params}).subscribe({
-				next: (savedList: Topic[]) => {
-					savedList.forEach((topic: Topic) => {
+				next: (topicList: Topic[]) => {
+					topicList.forEach((topic: Topic) => {
 						this.initConnection(topic);
-						this.topicList.push(topic);
+						this.topicList.push({...new Topic(), ...topic});
 					});
-					return resolve(savedList);
+					return resolve(topicList);
 				},
 				error: (error: any) => {
 					return reject(error);
@@ -67,7 +65,7 @@ export class TopicService {
 			this.httpClient.post<Topic>(environment.topic.rest.create, topic).subscribe({
 				next: (savedTopic: Topic) => {
 					this.initConnection(savedTopic)
-					this.topicList.push(savedTopic);
+					this.topicList.push({...new Topic(), ...savedTopic});
 					return resolve(savedTopic);
 				},
 				error: (error: any) => {
@@ -81,9 +79,6 @@ export class TopicService {
 	private initConnection(topic: Topic): Client {
 		const client: Client = new Client({
 			brokerURL: "ws://localhost:8080/chat",
-			debug: (message: string) => {
-				console.log(message);
-			},
 			onConnect: () => {
 				client.subscribe("/topic/reply", (message: IMessage) => {
 					console.log(message);
