@@ -28,7 +28,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.cors()
 		.and()
 		.authorizeRequests()
-			.antMatchers("/chat/**").permitAll()
+			.antMatchers("/socket/**").permitAll()
 			.anyRequest().authenticated()
 		.and()
 		.oauth2ResourceServer().jwt();

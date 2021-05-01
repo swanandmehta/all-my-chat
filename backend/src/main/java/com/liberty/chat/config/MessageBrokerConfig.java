@@ -19,11 +19,11 @@ public class MessageBrokerConfig implements WebSocketMessageBrokerConfigurer {
 
 	@Override
 	public void configureMessageBroker(MessageBrokerRegistry registry) {
-		registry.enableSimpleBroker("/topic");
+		registry.enableSimpleBroker("/queue");
 	}
 	
 	@Override
 	public void registerStompEndpoints(StompEndpointRegistry registry) {
-		registry.addEndpoint("/chat").setAllowedOrigins("http://localhost:4200");
+		registry.addEndpoint("/socket").setAllowedOrigins("http://localhost:4200");
 	}
 }

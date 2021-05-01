@@ -3,26 +3,35 @@
  */
 package com.liberty.chat.controller;
 
-import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
-import org.springframework.stereotype.Controller;
+import java.util.List;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.liberty.chat.dto.MessageDto;
+import com.liberty.chat.modal.Message;
+import com.liberty.chat.service.IMessageService;
+import com.liberty.chat.transformer.MessageTransformer;
 
 /**
  * @author Swanand
  *
  */
-@Controller
+@RestController
+@RequestMapping("/message")
 public class MessageController {
 	
-	private final SimpMessagingTemplate template;
+	private IMessageService messageService;
 	
-	public MessageController(SimpMessagingTemplate template) {
-		this.template = template;
+	public MessageController(IMessageService messageService) {
+		this.messageService = messageService;
 	}
-		
-	@MessageMapping("/topic")
-	public void send(String message) {
-		template.convertAndSend("/topic/reply", message);
+	
+	@GetMapping
+	public List<MessageDto> getAll(@RequestParam("topicId") String topicId) {
+		List<Message> messageList = messageService.getByTopicId(topicId);
+		return MessageTransformer.toMessageDto(messageList);
 	}
-
 }

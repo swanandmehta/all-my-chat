@@ -12,6 +12,11 @@ export const environment = {
 			getAll: "http://localhost:8080/topic",
 			create: "http://localhost:8080/topic"
 		}
+	},
+	message: {
+		rest: {
+			getAll: "http://localhost:8080/message",		
+		}
 	}
 
 };

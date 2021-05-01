@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.liberty.chat.service;
+package com.liberty.chat.service.impl;
 
 import java.util.List;
 
@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.liberty.chat.modal.Topic;
 import com.liberty.chat.repository.ITopicRepository;
+import com.liberty.chat.service.ITopicService;
 
 /**
  * @author Swanand

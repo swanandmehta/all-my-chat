@@ -1,7 +1,7 @@
 <form [formGroup]="chatForm" (submit)="onSendMessage()">
 
-    <div class="clr-row message-pane-height">
-        <app-message class="clr-col-12" [message]="message" *ngFor="let message of topic.messageList"></app-message>
+    <div class="message-pane-height">
+            <app-message class="clr-col-12 p-0" [message]="message" *ngFor="let message of topic.messageList"></app-message>
     </div>
 
     <div class="clr-row">

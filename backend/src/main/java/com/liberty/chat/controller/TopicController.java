@@ -38,8 +38,15 @@ public class TopicController {
 	}
 	
 	@GetMapping
-	public List<TopicDto> getAll(@RequestParam("userId") String userId) {
-		List<Topic> topicList = topicService.getByUserId(userId);
+	public List<TopicDto> getAll(@RequestParam(name = "userId", required = false, defaultValue = "") String userId) {
+		List<Topic> topicList = null;
+
+		if(userId.isEmpty()) {
+			topicList = topicService.getAll();
+		} else {
+			topicList = topicService.getByUserId(userId);
+		}
+		
 		return TopicTransformer.toTopicDto(topicList);
 	}
 }

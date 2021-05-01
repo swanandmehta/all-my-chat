@@ -24,6 +24,7 @@ export class UserService {
 			const applicationUser: User = new User();
 			applicationUser.id = user.sub;
 			applicationUser.name = user.given_name;
+			applicationUser.email = user.email;
 			this.user = applicationUser;
 			return resolve(applicationUser);
 		});

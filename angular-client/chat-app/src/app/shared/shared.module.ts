@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 import { ClarityModule } from '@clr/angular';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './interceptor/auth-interceptor';
+import { OktaInterceptor } from './interceptor/okta-interceptor';
 
 
 
@@ -43,6 +44,11 @@ export class SharedModule {
           useClass: AuthInterceptor, 
           multi: true 
         },
+        { 
+          provide: HTTP_INTERCEPTORS, 
+          useClass: OktaInterceptor, 
+          multi: true 
+        }
       ]
     };
   }
