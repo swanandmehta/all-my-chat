@@ -1,6 +1,9 @@
 <div *ngIf="message.role === 'AGENT'">
     <div class="alert alert-info" role="alert">
-        <div class="alert-text text-left">{{message.content}}</div>
+        <div class="alert-text" 
+            [ngClass]="{'text-right': activeUser !== null && activeUser.email === 'agent@servicedesk.com' }">
+            {{message.content}}
+        </div>
     </div>
 </div>
 
@@ -12,6 +15,6 @@
 
 <div *ngIf="message.role === 'USER'">
     <div class="alert alert-success" role="alert">
-        <div class="alert-text text-right">{{message.content}}</div>
+        <div class="alert-text text-right" [ngClass]="{'text-left': activeUser !== null && activeUser.email === 'agent@servicedesk.com' }" >{{message.content}}</div>
     </div>
 </div>

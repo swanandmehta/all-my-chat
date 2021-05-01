@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { OktaAuthService } from '@okta/okta-angular';
 import { ModalConfig } from 'src/app/shared/config/modal-config';
 import { Topic } from 'src/app/shared/dto/topic';
 import { User } from 'src/app/shared/dto/user';
@@ -16,7 +17,8 @@ export class DashboardHomeComponent implements OnInit {
 	public topicList: Topic[];
 	public userName: String = '';
 
-	constructor(private topicService: TopicService, private userService: UserService) {
+	constructor(private topicService: TopicService, private userService: UserService, 
+		private authService: OktaAuthService) {
 		this.modalConfig = new ModalConfig();
 		this.topicList = this.topicService.getTopicList();
 		this.userService.getCurrentUser().then(
@@ -37,6 +39,12 @@ export class DashboardHomeComponent implements OnInit {
 
 	onTopicSelection(topic: Topic): void {
 		this.topicService.createTopic(topic);
+	}
+
+	async logout(): Promise<boolean> {
+		this.authService.tokenManager.clear();
+		await this.authService.signOut();
+		return Promise.resolve(true);
 	}
 
 }

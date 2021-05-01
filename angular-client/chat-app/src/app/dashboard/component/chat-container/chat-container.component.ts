@@ -16,8 +16,8 @@ export class ChatContainerComponent implements OnInit, AfterViewChecked {
 
 	@Input("topic")
 	public topic: Topic;
-	
-	@ViewChild('scrollableElement') 
+
+	@ViewChild('scrollableElement')
 	private scrollableDiv: ElementRef | null = null;
 
 	public chatForm: FormGroup;
@@ -44,38 +44,47 @@ export class ChatContainerComponent implements OnInit, AfterViewChecked {
 	}
 
 	ngOnInit(): void {
-		if(this.topic !== undefined && this.topic.name !== '' && this.topic.messageList.length === 0) {
+		if (this.topic !== undefined && this.topic.name !== '' && this.topic.messageList.length === 0) {
 			this.messageService.getAllMessage(this.topic.uuid).then(
 				(messsageList: Message[]) => {
 					this.topic.messageList = messsageList;
-					this.scrollToBottom();					
+					this.scrollToBottom();
 				}
 			)
 		}
 	}
 
-	ngAfterViewChecked() {        
-        this.scrollToBottom();        
+	ngAfterViewChecked() {
+		this.scrollToBottom();
 	}
-	
+
 	scrollToBottom(): void {
-		if(this.scrollableDiv !== null) {
+		if (this.scrollableDiv !== null) {
 			this.scrollableDiv.nativeElement.scrollTop = this.scrollableDiv.nativeElement.scrollHeight;
 		}
 	}
 
 	onSendMessage(): void {
-		if(this.chatForm.valid && this.activeUser !== null) {
+		if (this.chatForm.valid && this.activeUser !== null) {
 			const messageDto: Message = new Message();
 			messageDto.content = this.chatForm.value.content;
 			messageDto.role = this.activeUser.email === "agent@servicedesk.com" ? "AGENT" : 'USER';
 			messageDto.topicId = this.topic.uuid;
-			
+
 			this.client.publish({
-				destination: "/topic/"+this.topic.uuid,
+				destination: "/topic/" + this.topic.uuid,
 				body: JSON.stringify(messageDto)
 			});
+
+			this.reset();
 		}
+	}
+
+	private reset(): void {
+		this.chatForm.reset({
+			content: '',
+		}, { emitEvent: false });
+
 	}
 
 }
