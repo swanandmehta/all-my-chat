@@ -19,7 +19,7 @@ import { RootComponent } from './component/root/root.component';
     BrowserAnimationsModule,
     CommonModule,
     LandingRoutingModule,
-    SharedModule
+    SharedModule.forRoot()
   ],
   bootstrap: [RootComponent]
 })

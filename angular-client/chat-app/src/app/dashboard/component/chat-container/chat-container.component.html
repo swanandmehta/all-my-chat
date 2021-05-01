@@ -1,4 +1,4 @@
-<form [formGroup]="chatForm">
+<form [formGroup]="chatForm" (submit)="onSendMessage()">
 
     <div class="clr-row message-pane-height">
         <app-message class="clr-col-12" [message]="message" *ngFor="let message of topic.messageList"></app-message>
@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="clr-col-2">
-            <button type="button" class="btn btn-primary btn-block">Send</button>
+            <button type="button" type="submit" class="btn btn-primary btn-block">Send</button>
         </div>
     </div>
 </form>

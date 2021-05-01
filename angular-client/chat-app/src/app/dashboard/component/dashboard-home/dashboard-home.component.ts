@@ -26,7 +26,7 @@ export class DashboardHomeComponent implements OnInit {
   }
 
   onTopicSelection(topic: Topic): void {
-    this.topicList.push(topic);
+    this.topicService.createTopic(topic);
   }
 
 }
