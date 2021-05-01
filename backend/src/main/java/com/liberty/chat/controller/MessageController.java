@@ -17,7 +17,7 @@ import com.liberty.chat.dto.MessageDto;
 public class MessageController {
 	
 	@MessageMapping("/message")
-	@SendTo("/reply")
+	@SendTo("/topic/greetings")
 	public MessageDto send(MessageDto message) {
 		return message;
 	}
