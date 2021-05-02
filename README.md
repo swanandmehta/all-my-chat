@@ -8,6 +8,7 @@ This is basic chating application created using below tech stack
 4. Typescript
 5. Angular
 6. H2 DB
+7. OAuth2.0
 
 How can i use this repo?
 1. Checkout the repo
