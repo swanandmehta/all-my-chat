@@ -110,7 +110,7 @@ export class TopicService {
 			brokerURL: "ws://localhost:8080/socket",
 			onConnect: () => {
 				client.subscribe("/queue/" + topic.uuid, (message: IMessage) => {
-					if(topic.messageList.length !== 0){
+					if(topic.messageList.length !== 0 || topic.isOpen == true){
 						topic.messageList.push(JSON.parse(message.body) as Message)
 					}
 				});

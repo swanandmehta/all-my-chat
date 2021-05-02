@@ -5,4 +5,5 @@ export class Topic {
     name: string = '';
     uuid: string = '';
     messageList: Message[] = []; 
+    isOpen: boolean = false;
 }

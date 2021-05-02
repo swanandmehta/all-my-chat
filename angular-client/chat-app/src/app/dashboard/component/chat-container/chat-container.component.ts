@@ -54,14 +54,7 @@ export class ChatContainerComponent implements OnInit, AfterViewChecked {
 	 * Used to load message for given topic Used to scroll at very end of chat
 	 */
 	ngOnInit(): void {
-		if (this.topic !== undefined && this.topic.name !== '' && this.topic.messageList.length === 0) {
-			this.messageService.getAllMessage(this.topic.uuid).then(
-				(messsageList: Message[]) => {
-					this.topic.messageList = messsageList;
-					this.scrollToBottom();
-				}
-			)
-		}
+		this.loadMessage();
 	}
 
 	/**
@@ -107,6 +100,18 @@ export class ChatContainerComponent implements OnInit, AfterViewChecked {
 			content: '',
 		}, { emitEvent: false });
 
+	}
+
+	private loadMessage(): void {
+		if (this.topic !== undefined && this.topic.name !== '' && this.topic.messageList.length === 0) {
+			this.messageService.getAllMessage(this.topic.uuid).then(
+				(messsageList: Message[]) => {
+					this.topic.messageList = messsageList;
+					this.scrollToBottom();
+					this.topic.isOpen = true;
+				}
+			)
+		}
 	}
 
 }
