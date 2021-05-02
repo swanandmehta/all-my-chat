@@ -14,6 +14,7 @@ import com.liberty.chat.service.IMessageService;
 import com.liberty.chat.transformer.MessageTransformer;
 
 /**
+ * Websocket controller for application
  * @author Swanand
  *
  */
@@ -29,6 +30,13 @@ public class WebsocketController {
 		this.messageService = messageService;
 	}
 		
+	/**
+	 * Recieves the message based on "topic/{uuid}"
+	 * Saves the message in database
+	 * forwards the entry to "queue/{uuid}"
+	 * @param topicId
+	 * @param dto
+	 */
 	@MessageMapping("/topic/{uuid}")
 	public void send(@DestinationVariable("uuid") String topicId, MessageDto dto) {
 		Message message = MessageTransformer.fromMessageDto(dto);

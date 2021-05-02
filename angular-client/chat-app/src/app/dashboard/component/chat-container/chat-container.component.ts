@@ -24,6 +24,13 @@ export class ChatContainerComponent implements OnInit, AfterViewChecked {
 	public client: Client;
 	public activeUser: User | null = null;
 
+	/**
+	 * Chat container constructor
+	 * Create and loads topic and establish connection to server using sockets
+	 * @param formBuilder 
+	 * @param messageService 
+	 * @param userService 
+	 */
 	constructor(private formBuilder: FormBuilder, private messageService: MessageService, private userService: UserService) {
 		this.topic = new Topic();
 		this.userService.getCurrentUser().then(
@@ -43,6 +50,9 @@ export class ChatContainerComponent implements OnInit, AfterViewChecked {
 		this.client.activate();
 	}
 
+	/**
+	 * Used to load message for given topic Used to scroll at very end of chat
+	 */
 	ngOnInit(): void {
 		if (this.topic !== undefined && this.topic.name !== '' && this.topic.messageList.length === 0) {
 			this.messageService.getAllMessage(this.topic.uuid).then(
@@ -54,16 +64,25 @@ export class ChatContainerComponent implements OnInit, AfterViewChecked {
 		}
 	}
 
+	/**
+	 * Used to scroll after View is updated
+	 */
 	ngAfterViewChecked() {
 		this.scrollToBottom();
 	}
 
+	/**
+	 * used to scroll at bottom of the page
+	 */
 	scrollToBottom(): void {
 		if (this.scrollableDiv !== null) {
 			this.scrollableDiv.nativeElement.scrollTop = this.scrollableDiv.nativeElement.scrollHeight;
 		}
 	}
 
+	/**
+	 * Uses scoket protocol and user email to determine and sent the message to backend
+	 */
 	onSendMessage(): void {
 		if (this.chatForm.valid && this.activeUser !== null) {
 			const messageDto: Message = new Message();
@@ -80,6 +99,9 @@ export class ChatContainerComponent implements OnInit, AfterViewChecked {
 		}
 	}
 
+	/**
+	 * Used to rest form after action
+	 */
 	private reset(): void {
 		this.chatForm.reset({
 			content: '',

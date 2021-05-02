@@ -19,6 +19,12 @@ export class TopicModalComponent implements OnInit {
 
   public topicForm: FormGroup;
 
+  /**
+   * Constructor for Topic Modal
+   * Creates the modal with default configuration
+   * @param formBuilder 
+   * @param toaster 
+   */
   constructor(private formBuilder: FormBuilder, private toaster: ToastrService) {
 
     this.topicForm = this.formBuilder.group({
@@ -33,11 +39,17 @@ export class TopicModalComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * Close event for modal
+   */
   onClose(): void {
     this.reset();
     this.modalConfig.state = false;
   }
 
+  /**
+   * Confirm/OK event for modal
+   */
   onConfirm(): void {
     if(this.topicForm.valid) {
       const topic: Topic = {...new Topic(), ...this.topicForm.value};
@@ -50,6 +62,9 @@ export class TopicModalComponent implements OnInit {
 
   }
 
+  /**
+   * Resets the form after use
+   */
   private reset(): void {
     this.topicForm.reset({
       name:'',

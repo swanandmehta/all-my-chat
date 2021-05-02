@@ -10,6 +10,11 @@ export class AuthInterceptor implements HttpInterceptor {
 
     }
 
+    /**
+     * Interceptor is used to send bearer token using headers
+     * @param request 
+     * @param next 
+     */
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         const accessToken: String | undefined = this.oktaAuthService.getAccessToken();
 

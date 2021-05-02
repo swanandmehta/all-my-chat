@@ -17,6 +17,14 @@ export class DashboardHomeComponent implements OnInit {
 	public topicList: Topic[];
 	public userName: String = '';
 
+	/**
+	 * Constructor for Dashboard Home
+	 * Loads all avaliable topic for User or Client
+	 * Loads user
+	 * @param topicService 
+	 * @param userService 
+	 * @param authService 
+	 */
 	constructor(private topicService: TopicService, private userService: UserService, 
 		private authService: OktaAuthService) {
 		this.modalConfig = new ModalConfig();
@@ -33,14 +41,24 @@ export class DashboardHomeComponent implements OnInit {
 	ngOnInit(): void {
 	}
 
+	/**
+	 * Trigger for opening new chat modal
+	 */
 	openNewChat(): void {
 		this.modalConfig.state = true;
 	}
 
+	/**
+	 * Callback for topic creation used by chat modal
+	 * @param topic 
+	 */
 	onTopicSelection(topic: Topic): void {
 		this.topicService.createTopic(topic);
 	}
 
+	/**
+	 * Logout user from application and okta session
+	 */
 	async logout(): Promise<boolean> {
 		this.authService.tokenManager.clear();
 		await this.authService.signOut();

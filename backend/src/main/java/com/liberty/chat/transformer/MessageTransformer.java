@@ -9,7 +9,6 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import com.liberty.chat.dto.MessageDto;
-import com.liberty.chat.enums.Role;
 import com.liberty.chat.modal.Message;
 
 /**

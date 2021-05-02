@@ -8,7 +8,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * @author Swanand
- *
+ * Enable Spring to run scheduling task for the robot
  */
 @Configuration
 @EnableScheduling

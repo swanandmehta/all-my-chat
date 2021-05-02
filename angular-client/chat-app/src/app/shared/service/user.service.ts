@@ -14,6 +14,9 @@ export class UserService {
 		this.user = null;
 	}
 
+	/**
+	 * Loads active user from Okta and create domain specific user for future use
+	 */
 	getCurrentUser(): Promise<User> {
 		if (this.user != null) {
 			return Promise.resolve(this.user);

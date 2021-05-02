@@ -15,10 +15,20 @@ export class TopicService {
 
 	private topicList: Topic[];
 
+	/**
+	 * 
+	 * @param httpClient 
+	 * @param userService 
+	 */
 	constructor(private httpClient: HttpClient, private userService: UserService) {
 		this.topicList = [];
 	}
 
+	/**
+	 * returns topic list 
+	 * In case of topic do not exist checks with server and updates the topic
+	 * 
+	 */
 	getTopicList(): Topic[] {
 		if (this.topicList.length == 0) {
 			this.loadAllTopic();
@@ -26,6 +36,11 @@ export class TopicService {
 		return this.topicList;
 	}
 
+	/**
+	 * Load all topics as per user
+	 * for Normal user will have specific topic created by him will be return
+	 * for Agent all topics will be returned
+	 */
 	loadAllTopic(): Promise<Topic[]> {
 		return new Promise<Topic[]>(async (resolve, reject) => {
 			const user: User = await this.userService.getCurrentUser();
@@ -54,6 +69,11 @@ export class TopicService {
 		});
 	}
 
+	/**
+	 * Creates a topic
+	 * returns error in case of userid is missing or error from server
+	 * @param topic 
+	 */
 	createTopic(topic: Topic): Promise<Topic> {
 		return new Promise<Topic>(async (resolve, reject) => {
 			const user: User = await this.userService.getCurrentUser();
@@ -79,6 +99,12 @@ export class TopicService {
 		});
 	}
 
+	/**
+	 * Create connection to recieve the messages
+	 * the messages are created subscribe in runtime
+	 * so all windows could be updated in case user is working with multiple topics
+	 * @param topic 
+	 */
 	private initConnection(topic: Topic): Client {
 		const client: Client = new Client({
 			brokerURL: "ws://localhost:8080/socket",

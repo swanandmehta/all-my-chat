@@ -18,6 +18,8 @@ import com.liberty.chat.service.ITopicService;
 import com.liberty.chat.transformer.TopicTransformer;
 
 /**
+ * Root controller for "/topic"
+ * used to CRUD operations topic
  * @author Swanand
  *
  */
@@ -31,12 +33,25 @@ public class TopicController {
 		this.topicService = topicService;
 	}
 	
+	/**
+	 * Creates Topic
+	 * @param dto
+	 * @return
+	 */
 	@PostMapping
 	public TopicDto create(@RequestBody TopicDto dto) {
 		Topic topic = topicService.save(TopicTransformer.fromTopicDto(dto));
 		return TopicTransformer.toTopicDto(topic);
 	}
 	
+	
+	/**
+	 * Loads all avalible topics
+	 * in case userid is provided it will load all the topic for the user
+	 * in case userid is not provided it will load all avaliable topics
+	 * @param userId
+	 * @return
+	 */
 	@GetMapping
 	public List<TopicDto> getAll(@RequestParam(name = "userId", required = false, defaultValue = "") String userId) {
 		List<Topic> topicList = null;

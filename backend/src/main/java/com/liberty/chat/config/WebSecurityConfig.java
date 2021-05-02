@@ -22,6 +22,10 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+	/**
+	 * Secures all the endpoints except "/socket/**" which are used by websockets
+	 * all other endpoints authenticated using okta servers
+	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
@@ -34,6 +38,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.oauth2ResourceServer().jwt();
 	}
 	
+	/**
+	 * Cors configuration to allow access from localhost:4200
+	 * @return
+	 */
 	@Bean
     protected CorsConfigurationSource corsConfigurationSource() {
 		final CorsConfiguration configuration = new CorsConfiguration();

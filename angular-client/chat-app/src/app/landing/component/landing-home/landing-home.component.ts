@@ -13,6 +13,9 @@ export class LandingHomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * Login btn click callback
+   */
   onLoginBtnClick(): void {
     this.router.navigateByUrl("/dashboard");
   }

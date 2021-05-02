@@ -39,6 +39,9 @@ public class RobotService {
 		this.messageService = messageService;
 	}
 
+	/**
+	 * Robot informs current time every 120sec to all the topics or conversations
+	 */
 	@Scheduled(fixedDelay = 120000, initialDelay = 10000)
 	public void whatIsTheTime() {
 		List<Topic> topicList = topicService.getAll();

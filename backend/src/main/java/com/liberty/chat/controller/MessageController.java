@@ -16,6 +16,7 @@ import com.liberty.chat.service.IMessageService;
 import com.liberty.chat.transformer.MessageTransformer;
 
 /**
+ * Root controller for messages
  * @author Swanand
  *
  */
@@ -29,6 +30,11 @@ public class MessageController {
 		this.messageService = messageService;
 	}
 	
+	/**
+	 * Loads all messages based on the topic Id
+	 * @param topicId
+	 * @return
+	 */
 	@GetMapping
 	public List<MessageDto> getAll(@RequestParam("topicId") String topicId) {
 		List<Message> messageList = messageService.getByTopicId(topicId);

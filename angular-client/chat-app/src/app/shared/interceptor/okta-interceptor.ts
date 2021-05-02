@@ -9,6 +9,11 @@ export class OktaInterceptor implements HttpInterceptor {
 
     }
 
+    /**
+     * Was supposed to handle interaction with Okta but not requied anymore
+     * @param request 
+     * @param next 
+     */
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(request);
     }

@@ -9,10 +9,21 @@ import { UserService } from './user.service';
 })
 export class MessageService {
 
+	/**
+	 * 
+	 * @param httpClient 
+	 * @param userService 
+	 */
 	constructor(private httpClient: HttpClient, private userService: UserService) {
 		
 	}
 
+	/**
+	 * Load all message for given topic 
+	 * in case topic id is not provided return error
+	 * in case of server failuer returns server error
+	 * @param topicId 
+	 */
 	getAllMessage(topicId: string): Promise<Message[]> {
 		return new Promise<Message[]>(async (resolve, reject) => {
 			let params = new HttpParams();
